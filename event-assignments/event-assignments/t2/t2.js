@@ -1,5 +1,3 @@
-import { distance } from "../../examble/euclidean.js";
-
 const restaurants = [
   {
     location: {type: 'Point', coordinates: [25.018456, 60.228982]},
@@ -773,55 +771,49 @@ const restaurants = [
 ];
 
 // your code here
-
 const taulukko = document.querySelector('#target')
+const modal = document.querySelector('#modal')
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
+let edellinenHighLight;
 
-function succes(pos) {
-  const crd = pos.coords;
-  console.log(crd);
-  // muista geoJSON lingitude ensin
-  const alkupiste = [crd.longitude, crd.latitude];
-  restaurants.sort(function(a,b) {
-    return(
-      distance(alkupiste, a.location.coordinates) -
-      distance(alkupiste, b.location.coordinates)
-    );
+restaurants.sort(function (a,b) {
+  return a.name.toUpperCase() > navigator.name.toUpperCase() ? 1 : -1;
+});
+
+for(const restaurant of restaurants) {
+  //rivi
+  const tr = document.createElement('tr');
+  tr.addEventListener('click', function() {
+    if(edellinenHighLight) {
+      edellinenHighLight.classList.remove('hightlight');
+      console.log(edellinenHighLight);
+    }
+    tr.classList.add('highlight');
+    edellinenHighLight = tr;
+
+    // tyhjennä modal
+    modal.innerHTML = '';
+    modal.showModal();
+    // tee modalin sisältö
+    const nameH3 = document.createElement('h3');
+    nameH3.innerText = restaurant.name;
+
+    modal.append(nameH3);
   });
 
-  console.log(restaurants);
-  for(const restaurant of restaurants) {
-    //rivi
-    const tr = document.createElement('tr');
+  //nimisolu
+  const nameTd = document.createElement('td');
+  nameTd.innetText = restaurant.name;
 
-    //nimisolu
-    const nameTd = document.createElement('td');
-    nameTd.innetText = restaurant.name;
+  //osoitesolu
+  const addressTd = document.createElement('td');
+  addressTd.innerText = restaurant.address;
 
-    //osoitesolu
-    const addressTd = document.createElement('td');
-    addressTd.innerText = restaurant.address;
+  //kaupunkisolu
+  const cityTd = document.createElement('td');
+  cityTd.innerText = restaurant.city;
+  //lisätään solut riviin
 
-    //kaupunkisolu
-    const cityTd = document.createElement('td');
-    cityTd.innerText = restaurant.city;
-    //lisätään solut riviin
-
-    tr.append(nameTd, addressTd, cityTd);
-    taulukko.append(tr);
-  }
+  tr.append(nameTd, addressTd, cityTd);
+  taulukko.append(tr);
 }
-
-// error while reciving location
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-}
-
-// Starts the location search
-navigator.geolocation.getCurrentPosition(succes, error, options);
-
