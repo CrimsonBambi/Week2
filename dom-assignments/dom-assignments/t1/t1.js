@@ -21,7 +21,7 @@ const todoList = [
 
 const ul = document.querySelector('ul'); // selects the first ul-element from the document
 
-for (item of todoList) {
+for (let item of todoList) {
   const li = `<li> 
   <input type="checkbox" id="todo-${item.id}" ${item.completed ? "checked" : ""}>
   <label for="todo-${item.id}">${item.task}</label>
