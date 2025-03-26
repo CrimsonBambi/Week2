@@ -1,3 +1,5 @@
+//*Open t5 folder in your IDE/editor. In the t5.js file, you will find an array containing restaurant data, including their respective locations. The objective of the application is to add restaurants on a Leaflet map as markers. When a marker is clicked, show the restaurants name and address. Name should be in <h3> element and address should be in <p> element.
+
 const restaurants = [
   {
     location: {type: 'Point', coordinates: [25.018456, 60.228982]},
@@ -771,3 +773,41 @@ const restaurants = [
 ];
 
 // your code here
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  const crd = pos.coords;
+
+  // Printing location information to the console
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+
+// Initialize the Leaflet map
+const map = L.map('map').setView([crd.latitude, crd.longitude], 13);
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Loop through restaurants and add markers
+restaurants.forEach(restaurant => {
+    L.marker(restaurant.location.coordinates)
+        .addTo(map)
+        .bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p>`);
+});
+
+}
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+// Starts the location search
+navigator.geolocation.getCurrentPosition(success, error, options);
+
