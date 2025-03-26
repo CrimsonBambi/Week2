@@ -782,8 +782,11 @@ const options = {
   maximumAge: 0
 };
 
+// A function that is called when location information is retrieved
 function succes(pos) {
   const crd = pos.coords;
+
+  // Printing location information to the console
   console.log(crd);
   // muista geoJSON lingitude ensin
   const alkupiste = [crd.longitude, crd.latitude];
@@ -801,7 +804,7 @@ function succes(pos) {
 
     //nimisolu
     const nameTd = document.createElement('td');
-    nameTd.innetText = restaurant.name;
+    nameTd.innerText = restaurant.name;
 
     //osoitesolu
     const addressTd = document.createElement('td');
