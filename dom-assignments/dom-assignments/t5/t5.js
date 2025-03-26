@@ -788,22 +788,22 @@ function success(pos) {
   console.log(`Longitude: ${crd.longitude}`);
   console.log(`More or less ${crd.accuracy} meters.`);
 
-// Initialize the Leaflet map
-const map = L.map('map').setView([crd.latitude, crd.longitude], 13);
+  // Initialize the Leaflet map
+  const map = L.map('map').setView([crd.latitude, crd.longitude], 13);
 
-// Add OpenStreetMap tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
-// Loop through restaurants and add markers
-restaurants.forEach(restaurant => {
-    L.marker(restaurant.location.coordinates)
-        .addTo(map)
-        .bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p>`);
-});
-
+  // Loop through restaurants and add markers
+  restaurants.forEach(restaurant => {
+      L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]])
+          .addTo(map)
+          .bindPopup(`<h3>${restaurant.name}</h3><p>${restaurant.address}</p>`);
+  });
 }
+
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
