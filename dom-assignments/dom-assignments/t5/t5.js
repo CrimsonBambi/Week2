@@ -810,4 +810,3 @@ function error(err) {
 
 // Starts the location search
 navigator.geolocation.getCurrentPosition(success, error, options);
-
