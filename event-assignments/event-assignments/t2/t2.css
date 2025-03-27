@@ -26,6 +26,12 @@ td {
 }
 
 .highlight {
-  background-color: #a7a7a7;
+  background-color: #747272;
+  font-weight: bold;
+}
 
+#modal {
+  background-color: wheat;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 25vh;
 }

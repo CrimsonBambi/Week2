@@ -771,49 +771,67 @@ const restaurants = [
 ];
 
 // your code here
-const taulukko = document.querySelector('#target')
-const modal = document.querySelector('#modal')
 
-let edellinenHighLight;
+const taulukko = document.querySelector('table');
+const modal = document.querySelector('#modal');
 
-restaurants.sort(function (a,b) {
-  return a.name.toUpperCase() > navigator.name.toUpperCase() ? 1 : -1;
+let edellinenHighlight;
+
+// restaurants aakkosjärjestykseen
+restaurants.sort(function (a,b ){
+  return a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1;
 });
 
 for(const restaurant of restaurants) {
-  //rivi
+  // rivi
   const tr = document.createElement('tr');
-  tr.addEventListener('click', function() {
-    if(edellinenHighLight) {
-      edellinenHighLight.classList.remove('hightlight');
-      console.log(edellinenHighLight);
+  tr.addEventListener('click', function () {
+    if (edellinenHighlight) {
+    edellinenHighlight.classList.remove('highlight');
+    console.log(edellinenHighlight);
     }
-    tr.classList.add('highlight');
-    edellinenHighLight = tr;
 
-    // tyhjennä modal
+    tr.classList.add('highlight');
+
+    //tyhjennä modal
     modal.innerHTML = '';
+    //avaa modal
     modal.showModal();
-    // tee modalin sisältö
+    // tee sisältö modaliin
     const nameH3 = document.createElement('h3');
     nameH3.innerText = restaurant.name;
+    const addressP = document.createElement('p');
+    addressP.innerText = restaurant.address;
+    const postalCodeP = document.createElement('p');
+    postalCodeP.innerText = restaurant.postalCode;
+    const cityP = document.createElement('p');
+    cityP.innerText = restaurant.city;
+    const phoneP = document.createElement('p');
+    phoneP.innerText = restaurant.phone;
+    const companyP = document.createElement('p');
+    companyP.innerText = restaurant.company;
 
     modal.append(nameH3);
+    modal.append(addressP);
+    modal.append(postalCodeP);
+    modal.append(cityP);
+    modal.append(phoneP);
+    modal.append(companyP);
+
+
+    edellinenHighlight = tr;
   });
 
   //nimisolu
   const nameTd = document.createElement('td');
-  nameTd.innetText = restaurant.name;
-
+  nameTd.innerText = restaurant.name;
   //osoitesolu
   const addressTd = document.createElement('td');
   addressTd.innerText = restaurant.address;
-
   //kaupunkisolu
   const cityTd = document.createElement('td');
   cityTd.innerText = restaurant.city;
-  //lisätään solut riviin
-
+  // lisätään solut riviin
   tr.append(nameTd, addressTd, cityTd);
   taulukko.append(tr);
-}
+};
