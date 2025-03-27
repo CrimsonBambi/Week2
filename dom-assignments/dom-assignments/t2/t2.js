@@ -37,4 +37,5 @@ for (let item of todoList) {
   li.appendChild(input);
   li.appendChild(label);
   ul.appendChild(li);
-} 
+}
+console.log(todoList); 
