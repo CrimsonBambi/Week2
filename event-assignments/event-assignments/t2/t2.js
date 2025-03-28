@@ -842,7 +842,7 @@ for(const restaurant of restaurants) {
   taulukko.append(tr);
 };
 
-// Add a single event listener for the close button
+// event listener for the close button
 modal.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('close-btn')) {
     modal.close(); // Close the modal
