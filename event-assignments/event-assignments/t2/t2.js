@@ -777,6 +777,7 @@ const modal = document.querySelector('#modal');
 
 let edellinenHighlight;
 
+
 // restaurants aakkosjärjestykseen
 restaurants.sort(function (a,b ){
   return a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1;
@@ -810,6 +811,9 @@ for(const restaurant of restaurants) {
     phoneP.innerText = restaurant.phone;
     const companyP = document.createElement('p');
     companyP.innerText = restaurant.company;
+    const closeButton = document.createElement('button');
+    closeButton.innerText = 'Close';
+    closeButton.classList.add('close-btn'); // Add a class for easier selection
 
     modal.append(nameH3);
     modal.append(addressP);
@@ -817,10 +821,12 @@ for(const restaurant of restaurants) {
     modal.append(cityP);
     modal.append(phoneP);
     modal.append(companyP);
-
+    modal.append(closeButton);
 
     edellinenHighlight = tr;
+
   });
+
 
   //nimisolu
   const nameTd = document.createElement('td');
@@ -835,3 +841,14 @@ for(const restaurant of restaurants) {
   tr.append(nameTd, addressTd, cityTd);
   taulukko.append(tr);
 };
+
+// Add a single event listener for the close button
+modal.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('close-btn')) {
+    modal.close(); // Close the modal
+    if (edellinenHighlight) {
+      edellinenHighlight.classList.remove('highlight'); // Remove highlight
+      edellinenHighlight = null; // Reset the highlight reference
+    }
+  }
+});
