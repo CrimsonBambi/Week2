@@ -1,6 +1,4 @@
-//ALL AWAIT INSIDE TRY CATCH
-
-import {fetchData} from '../../fetchData.js'; //requires in html <link type="module>"!!!
+import {fetchData} from '../../fetchData.js'; 
 
 const apiUrl = 'https://media2.edu.metropolia.fi/restaurant/api/v1';
 const tbl = document.querySelector('#target');
@@ -12,7 +10,7 @@ let previuousHl = null;
 //FUCNTIONS
 async function getAllRestaurants() {
   try {
-    restaurants = await fetchData(apiUrl + '/restaurants/'); //requires in html <link type="module>" if not async!!!
+    restaurants = await fetchData(apiUrl + '/restaurants/'); 
   } catch (e) {
     console.log(e);
   }
@@ -24,12 +22,10 @@ async function getDailyMenu(id, language) {
   console.log(url);
 
   try {
-    return await fetchData(url); //requires in html <link type="module>" if not async!!!
+    return await fetchData(url); 
   } catch (e) {
     console.log(e);
   }
-  //not reccomended to add here any html code
-  //only for fetching data
 }
 
 function sortRestaurantsInAlphabet() {
@@ -46,7 +42,7 @@ function sortRestaurantsInAlphabet() {
 
 function createTable() {
   for (const r of restaurants) {
-    const tr = document.createElement('tr'); //new row
+    const tr = document.createElement('tr'); 
     tr.addEventListener('click', async function () {
       try{
       previuousHl?.classList.remove('highlight');
@@ -69,7 +65,7 @@ function createTable() {
       }
       mdl.showModal();
       previuousHl = tr;
-      } catch{/* empty */}
+      } catch{}
     });
 
     createRestaurantCells(r, tr);
@@ -78,7 +74,7 @@ function createTable() {
 }
 
 function createRestaurantCells(r, tr) {
-  const nametd = document.createElement('td'); //name cell
+  const nametd = document.createElement('td'); 
   nametd.innerText = r.name;
 
   const addressTd = document.createElement('td');
@@ -111,15 +107,10 @@ function createMenuHtml(courses) {
   return html;
 }
 
-//MAIN FUCNTION -> Better to be in the end.
 async function main() {
   await getAllRestaurants();
   sortRestaurantsInAlphabet();
   createTable();
 }
 
-main(); //EXECUTE!
-
-
-/*
- */
+main(); 
