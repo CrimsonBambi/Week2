@@ -1,6 +1,6 @@
 //ALL AWAIT INSIDE TRY CATCH
 
-import {fetchData} from '../../lib/fetchData.js'; //requires in html <link type="module>"!!!
+import {fetchData} from '../../fetchData.js'; //requires in html <link type="module>"!!!
 
 const apiUrl = 'https://media2.edu.metropolia.fi/restaurant/api/v1';
 const tbl = document.querySelector('#target');
