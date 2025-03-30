@@ -1,4 +1,4 @@
-import { distance } from "../../examble/euclidean.js";
+import { distance } from "../../../examble/euclidean.js";
 
 const restaurants = [
   {
