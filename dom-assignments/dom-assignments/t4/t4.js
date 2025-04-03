@@ -1,4 +1,4 @@
-import { distance } from "../../../lib/euclidean.js";
+import { distance } from "../library/euclidean.js";
 
 const restaurants = [
   {
